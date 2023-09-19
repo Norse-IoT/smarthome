@@ -16,10 +16,8 @@ const int counterButtonPin = 19;
 const int internalLEDPin = 2;
 
 Button counterButton(counterButtonPin);
-Spinner spinner;
 
 void setup() {
-  spinner.begin(lcd);
   counterButton.begin();
   pinMode(musicButtonPin, INPUT_PULLUP);
   pinMode(internalLEDPin, OUTPUT);
@@ -41,7 +39,6 @@ void loop() {
   lcd.setCursor(0, 1);
   lcd.print(button_presses);
   lcd.setCursor(15, 1);
-  lcd.write(spinner.spin());
 
   if (counterButton.isPressed()) {  // debounce input
     button_presses++;
