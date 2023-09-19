@@ -1,3 +1,4 @@
+#pragma once
 /*
  * Example sketch that defines a class for debouncing push buttons.
  * It uses this class to toggle the built-in LED:
@@ -67,4 +68,3 @@ private:
   constexpr static int8_t rising = HIGH - LOW;
   constexpr static int8_t falling = LOW - HIGH;
 };
-

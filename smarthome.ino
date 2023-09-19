@@ -16,10 +16,12 @@ const int counterButtonPin = 19;
 const int internalLEDPin = 2;
 
 Button counterButton(counterButtonPin);
+Spinner spinner;
 
 void setup() {
+  spinner.begin(lcd);
   counterButton.begin();
-  pinMode(musicButtonPin, INPUT_PULLUP);  
+  pinMode(musicButtonPin, INPUT_PULLUP);
   pinMode(internalLEDPin, OUTPUT);
   lcd.init();       // initialize LCD
   lcd.backlight();  // turn on LCD backlight
@@ -28,7 +30,7 @@ void setup() {
 uint32_t button_presses = 0;
 
 void loop() {
-  bool switchState = digitalRead(musicButtonPin); // raw input
+  bool switchState = digitalRead(musicButtonPin);  // raw input
   digitalWrite(internalLEDPin, !switchState);
   if (switchState == LOW) {
     Megalovania::playNextNote();
@@ -38,8 +40,10 @@ void loop() {
   lcd.print("Button Presses:");
   lcd.setCursor(0, 1);
   lcd.print(button_presses);
+  lcd.setCursor(15, 1);
+  lcd.write(spinner.spin());
 
-  if (counterButton.isPressed()) { // debounce input
+  if (counterButton.isPressed()) {  // debounce input
     button_presses++;
   }
 }
